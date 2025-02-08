@@ -4,7 +4,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,12 +39,15 @@ import com.example.supabasesimpleproject.Presentation.Navigation.NavigationRoute
 // signInViewModel: SignInViewModel = viewModel() :  ViewModel, управляющий состоянием и логикой экрана входа.
 fun SignInScreen(navController: NavHostController, signInViewModel: SignInViewModel = viewModel()) {
 
-   val resultState by signInViewModel.resultState.collectAsState() // использует collectAsState() для преобразования потока состояний (Flow<ResultState>) из ViewModel в состояние
+    val resultState by signInViewModel.resultState.collectAsState() // использует collectAsState() для преобразования потока состояний (Flow<ResultState>) из ViewModel в состояние
     val uiState = signInViewModel.uiState //получает текущее состояние UI из ViewModel
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .imePadding()
     ) {
         //Вызовы TextFieldEmail и TextFieldPassword создают поля ввода для email и пароля, соответственно, используя ранее определенные функции
         TextFieldEmail(value = uiState.email, error = uiState.errorEmail,
@@ -62,14 +67,17 @@ fun SignInScreen(navController: NavHostController, signInViewModel: SignInViewMo
                 }
                 Text((resultState as ResultState.Error).message)
             }
+
             is ResultState.Initialized -> {
                 ButtonNavigation(stringResource(R.string.name)) {
                     signInViewModel.signIn().toString()
                 }
             }
+
             ResultState.Loading -> {
                 CircularProgressIndicator()
             }
+
             is ResultState.Success -> {
                 navController.navigate(NavigationRoutes.MAIN)
                 {
