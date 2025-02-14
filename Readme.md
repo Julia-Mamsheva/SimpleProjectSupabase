@@ -18,11 +18,11 @@
   ```
 <br> Библиотека для подключение Ktor (Ktor — это асинхронный фреймворк для создания серверных и клиентских приложений на Kotlin):
    ```kotlin
-      implementation("io.ktor:ktor-client-android:2.8.6")
+      implementation("io.ktor:ktor-client-android:3.0.3")
   ```
 <br> Библиотека для работы с навигацией (Navigation — это библиотека, которая упрощает навигацию между различными экранами (Composables) вашего приложения.  Она предоставляет структурированный и управляемый способ перехода между различными частями UI):
    ```kotlin
-      implementation("androidx.navigation:navigation-compose:3.0.3")
+      implementation("androidx.navigation:navigation-compose:2.8.6")
  ```
 <br> Библиотека для работы подлкючения ViewModel (ViewModel — это архитектурный компонент Android, который используется для хранения и управления состоянием UI (пользовательского интерфейса)):
    ```kotlin
