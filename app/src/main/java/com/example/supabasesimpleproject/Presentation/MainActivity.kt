@@ -3,6 +3,7 @@ package com.example.supabasesimpleproject.Presentation
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
             // Устанавливает тему приложения, определяя цвета, стили и т.д
             TestForLectionTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
+                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
                     // Функция, которая, создает NavHost для навигации между различными экранами приложения
                     NavHost()
                 }

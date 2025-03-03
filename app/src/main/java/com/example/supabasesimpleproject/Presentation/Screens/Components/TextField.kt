@@ -1,6 +1,8 @@
 package com.example.supabasesimpleproject.Presentation.Screens.Components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -10,8 +12,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -29,6 +35,7 @@ import com.example.supabasesimpleproject.R
 // error: Булево значение, указывающее на наличие ошибки
 // onvaluechange: Лямбда-функция, вызываемая при изменении значения поля
 fun TextFieldEmail(value: String, error:Boolean, onvaluechange: (String) -> Unit) {
+    val focusManager = LocalFocusManager.current
     androidx.compose.material3.TextField(
         value = value,
         textStyle = MaterialTheme.typography.displayMedium,
@@ -46,11 +53,16 @@ fun TextFieldEmail(value: String, error:Boolean, onvaluechange: (String) -> Unit
             disabledIndicatorColor = Color.Transparent,
             errorPlaceholderColor = Color.Red
         ),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email,  imeAction = ImeAction.Next),
+        keyboardActions = KeyboardActions(
+            onNext = { focusManager.moveFocus(FocusDirection.Down) }
+        ),
         shape = RoundedCornerShape(15.dp),
     )
 }
 @Composable
 fun TextFieldStandart(value: String, onvaluechange: (String) -> Unit) {
+    val focusManager = LocalFocusManager.current
     androidx.compose.material3.TextField(
         value = value,
         textStyle = MaterialTheme.typography.displayMedium,
@@ -66,6 +78,10 @@ fun TextFieldStandart(value: String, onvaluechange: (String) -> Unit) {
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
         ),
+        keyboardOptions = KeyboardOptions(  imeAction = ImeAction.Next),
+        keyboardActions = KeyboardActions(
+            onNext = { focusManager.moveFocus(FocusDirection.Down) }
+        ),
         shape = RoundedCornerShape(15.dp),
     )
 }
@@ -73,6 +89,7 @@ fun TextFieldStandart(value: String, onvaluechange: (String) -> Unit) {
 //Отличительная особенность — использование скрытие и отображение пароля
 @Composable
 fun TextFieldPassword(value: String, onvaluechange: (String) -> Unit) {
+    val focusManager = LocalFocusManager.current
     var passwordVisibility by remember { mutableStateOf(false) }
     androidx.compose.material3.TextField(
         value = value,
@@ -103,7 +120,10 @@ fun TextFieldPassword(value: String, onvaluechange: (String) -> Unit) {
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
-
+        ),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Next),
+        keyboardActions = KeyboardActions(
+            onNext = { focusManager.moveFocus(FocusDirection.Down) }
         ),
         shape = RoundedCornerShape(15.dp),
     )
