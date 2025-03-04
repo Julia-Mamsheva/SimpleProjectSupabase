@@ -75,7 +75,7 @@ dependencies {
     implementation(libs.postgrest.kt)
     implementation(libs.auth.kt)
     implementation(libs.realtime.kt)
-
+    implementation ("io.github.jan-tennert.supabase:storage-kt")
     //Ktor
     implementation(libs.ktor.client.android)
 
@@ -85,5 +85,9 @@ dependencies {
     //ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
+    //LiveData
+    implementation (libs.androidx.runtime.livedata)
 
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.7.0") // Check for the latest version
 }
