@@ -36,7 +36,7 @@ import com.example.supabasesimpleproject.Domain.models.Book
 import com.example.supabasesimpleproject.R
 
 /**
- * Композируемая функция в Jetpack Compose для создания карточки для отображения информации о книге , включая изображение, заголовок и описание
+ * Композируемая функция в Jetpack Compose для создания карточки для отображения информации о книге, включая изображение, заголовок и описание
  * */
 
 
