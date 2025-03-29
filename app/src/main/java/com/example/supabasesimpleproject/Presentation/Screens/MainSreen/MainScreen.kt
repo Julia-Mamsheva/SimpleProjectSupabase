@@ -27,6 +27,7 @@ import androidx.navigation.NavHostController
 import com.example.supabasesimpleproject.Presentation.Screens.Components.TextFieldSearch
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.supabasesimpleproject.Domain.State.ResultState
+import com.example.supabasesimpleproject.Presentation.Navigation.NavigationRoutes
 import com.example.supabasesimpleproject.Presentation.Screens.Components.BookCard
 import com.example.supabasesimpleproject.Presentation.Screens.Components.CategoryItem
 import kotlinx.coroutines.runBlocking
@@ -65,7 +66,10 @@ fun MainScreen(navController: NavHostController, mainViewModel: MainViewModel = 
             value = textSearch.value,
             onvaluechange = { newText -> // Обработчик изменения текста
                 textSearch.value = newText // Обновляем состояние текста поиска
-                mainViewModel.filterList(newText, selectedCategory.intValue) // Фильтруем список книг
+                mainViewModel.filterList(
+                    newText,
+                    selectedCategory.intValue
+                ) // Фильтруем список книг
             }
         )
         // Обработка различных состояний загрузки данных
@@ -102,11 +106,14 @@ fun MainScreen(navController: NavHostController, mainViewModel: MainViewModel = 
                 }
                 LazyColumn {
                     items(books.value) { it ->
-                        BookCard(book = it) {
+                        BookCard(book = it, getUrl = {
                             runBlocking { // Запускаем блокирующий код
                                 mainViewModel.getUrlImage(it) // Получаем URL изображения для книги
                             }
+                        }, onClick = {
+                            navController.navigate(NavigationRoutes.DETAILSBOOK + "/" + it.id) //Создаем маршрутизацию
                         }
+                        )
                     }
                 }
             }

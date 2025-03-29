@@ -1,9 +1,13 @@
 package com.example.supabasesimpleproject.Presentation.Screens.Components
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -95,6 +99,65 @@ fun TextFieldStandart(value: String, onvaluechange: (String) -> Unit) {
     )
 }
 
+@Composable
+fun TextFieldEdit(value: String, onValueChanged: (String) -> Unit) {
+    val focusManager = LocalFocusManager.current
+    androidx.compose.material3.TextField(
+        value = value,
+        textStyle = MaterialTheme.typography.displayMedium,
+        onValueChange = {
+            onValueChanged(it)
+        },
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+        colors = TextFieldDefaults.colors(
+            unfocusedContainerColor = Color.LightGray,
+            unfocusedTextColor = Color.Black,
+            focusedContainerColor = Color.LightGray,
+            focusedTextColor = Color.Black,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent
+        ),
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+        keyboardActions = KeyboardActions(
+            onNext = { focusManager.moveFocus(FocusDirection.Down) }
+        ),
+        shape = RoundedCornerShape(15.dp),
+    )
+}
+@Composable
+fun TextFieldDropDown(value: String,onExpandedChange: (Boolean) -> Unit) {
+
+    val focusManager = LocalFocusManager.current
+    androidx.compose.material3.TextField(
+        value = value,
+        textStyle = MaterialTheme.typography.displayMedium,
+        onValueChange = {
+
+        },
+        trailingIcon = {
+            IconButton(onClick = { onExpandedChange(true) }) {
+                Icon(Icons.Default.ArrowDropDown, contentDescription = null)
+            }
+        },
+        readOnly = true,
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+        colors = TextFieldDefaults.colors(
+            unfocusedContainerColor = Color.LightGray,
+            unfocusedTextColor = Color.Black,
+            focusedContainerColor = Color.LightGray,
+            focusedTextColor = Color.Black,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent
+        ),
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+        keyboardActions = KeyboardActions(
+            onNext = { focusManager.moveFocus(FocusDirection.Down) }
+        ),
+        shape = RoundedCornerShape(15.dp),
+    )
+}
 //Отличительная особенность — использование скрытие и отображение пароля
 @Composable
 fun TextFieldPassword(value: String, onvaluechange: (String) -> Unit) {

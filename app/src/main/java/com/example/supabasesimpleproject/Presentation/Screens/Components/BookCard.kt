@@ -1,6 +1,7 @@
 package com.example.supabasesimpleproject.Presentation.Screens.Components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -43,7 +44,7 @@ import com.example.supabasesimpleproject.R
 @Composable
 // Параметр book -  представляет собой объект типа Book. Это класс, который содержит информацию о книге
 // Параметр getUrl - это функция, которая принимает объект типа Book и возвращает строку (String). Эта функция используется для получения URL-адреса изображения книги.
-fun BookCard(book: Book, getUrl: (String) -> String) {
+fun BookCard(book: Book, getUrl: (String) -> String, onClick:()->Unit) {
     // Состояние для хранения URL изображения книги
     var imageUrl by remember { mutableStateOf("") }
 
@@ -51,6 +52,9 @@ fun BookCard(book: Book, getUrl: (String) -> String) {
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
+            .clickable {
+                onClick()
+            }
     ) {
         Row(
             modifier = Modifier.padding(16.dp),

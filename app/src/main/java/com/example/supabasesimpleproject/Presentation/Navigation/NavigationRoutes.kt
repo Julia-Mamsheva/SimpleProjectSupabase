@@ -10,4 +10,5 @@ object NavigationRoutes {
     const val SIGNUP ="signup"
     const val SPLASH ="splash"
     const val MAIN ="main"
+    const val DETAILSBOOK ="detailsbook"
 }

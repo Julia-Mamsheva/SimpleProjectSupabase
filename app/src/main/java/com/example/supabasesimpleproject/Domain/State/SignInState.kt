@@ -6,9 +6,9 @@ package com.example.supabasesimpleproject.Domain.State
  * */
 
 data class SignInState (
-    val email: String = "",
-    val password: String = "",
-    var errorEmail:Boolean = false,
+    val email: String = "test@test.ru",
+    val password: String = "123",
+    var errorEmail:Boolean = true,
     val errorPassword:Boolean = false
 )
 
